@@ -1,0 +1,29 @@
+{
+  "name": "animesourcebot",
+  "version": "1.0.0",
+  "description": "A reddit bot which sources new anime image submissions using the whatanime.ga API",
+  "license": "WTFPL-2.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha ./**/*.test.js --bail",
+    "statistics": "node ./scripts/statistics.js"
+  },
+  "author": "",
+  "dependencies": {
+    "btoa": "^1.2.1",
+    "chai": "^4.1.2",
+    "color-convert": "^1.9.2",
+    "dotenv": "^6.0.0",
+    "mime": "^2.3.1",
+    "mocha": "^5.2.0",
+    "node-fetch": "^2.1.2",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
+    "sharp": "^0.20.3",
+    "snoostorm": "0.0.5",
+    "snoowrap": "^1.15.2",
+    "tmp-promise": "^1.0.4"
+  }
+}

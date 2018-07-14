@@ -51,8 +51,6 @@ async function tryFindSource(uri, { minColorfulness, minOverhead }) {
         overhead = bestMatch.similarity - result.docs[i].similarity;
       }
     }
-    console.log(overhead);
-    console.log(result.docs.length);
     if(overhead < minOverhead) {
       return null;
     }

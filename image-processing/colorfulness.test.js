@@ -30,5 +30,16 @@ describe('## detect-grayscale', () => {
         })
         .catch(done);
     });
+    it('should detect single-channel jpeg as not colorful', (done) => {
+      let reader = sharp();
+      request.get('https://i.imgur.com/bpmaEiW.jpg').pipe(reader);
+      getColorfulness(reader)
+        .then(colorfulness => {
+          expect(colorfulness).to.be.gte(0.00);
+          expect(colorfulness).to.be.lt(0.01);
+          done();
+        })
+        .catch(done);
+    });
   });
 });

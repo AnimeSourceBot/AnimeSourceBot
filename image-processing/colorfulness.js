@@ -8,6 +8,9 @@ async function getColorfulness(reader) {
     request.get(reader).pipe(reader);
   }
   const metadata = await reader.metadata();
+  if(metadata.channels === 1) {
+    return 0; // Greyscale image
+  }
   const buffer = await reader.raw().toBuffer();
   let pixelCount = 0;
   let colorfulPixelCount = 0;
@@ -15,8 +18,7 @@ async function getColorfulness(reader) {
     const r = buffer[i];
     const g = buffer[i + 1];
     const b = buffer[i + 2];
-    const a = buffer[i + 3];
-    // saturation and value range from 0 to 10
+    // saturation and value range from 0 to 100
     const [hue, saturation, value] = convert.rgb.hsv(r, g, b);
     pixelCount += 1;
     if(value > 20 && saturation > 20) {

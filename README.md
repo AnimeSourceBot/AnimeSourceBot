@@ -8,9 +8,11 @@ You will need [a reddit script app](https://www.reddit.com/prefs/apps/) and [API
 
 - create `.env` and fill in the environment variables (see: `.env.template`)
 
+- 'yarn install' to install dependencies
+
 - `yarn test` to run tests
 
-- `yarn run` to run the bot
+- `yarn start` to run the bot
 
 ## License
 

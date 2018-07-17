@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha ./**/*.test.js --bail",
+    "test": "mocha ./**/*.test.js",
     "statistics": "node ./scripts/statistics.js"
   },
   "author": "",

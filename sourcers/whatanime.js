@@ -49,6 +49,7 @@ async function tryFindSource(uri, { minColorfulness, minOverhead }) {
     for(let i = 1; i < result.docs.length; ++i) {
       if(result.docs[i].mal_id !== bestMatch.mal_id) {
         overhead = bestMatch.similarity - result.docs[i].similarity;
+        break;
       }
     }
     if(overhead < minOverhead) {

@@ -174,5 +174,13 @@ describe('## whatanime', () => {
         })
         .catch(done);
     }).timeout(10 * 1000);
+    it('should not think random drawing is Azumanga Daioh', (done) => {
+      tryFindGoodSource('https://i.redd.it/1g2f3n5uqga11.jpg')
+        .then(output => {
+          expect(output).to.be.null;
+          done();
+        })
+        .catch(done);
+    }).timeout(10 * 1000);
   });
 });

@@ -3,7 +3,7 @@ const kitsu = require('./kitsu');
 
 async function aggregateInfo(anilistId) {
   const anilistInfo = await anilist.queryAnilistById(anilistId);
-  const kitsuInfo = await kitsu.queryKitsuByText(anilistInfo.title.native);
+  const kitsuInfo = await kitsu.queryKitsuByText(anilistInfo.title.native || anilistInfo.title.romaji);
   return {
     anilistInfo,
     kitsuInfo,

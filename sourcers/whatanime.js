@@ -15,22 +15,30 @@ function requestWhatanime(reader) {
   return reader
     .jpeg()
     .toBuffer()
-    .then(buffer =>
-      rp({
+    .then(buffer => {
+      if (buffer.length >= 1024 * 1024) {
+        throw new Error('Image size exceeds 1MB');
+      }
+      return rp({
         method: 'POST',
         uri: `https://whatanime.ga/api/search?token=${api_token}`,
         formData: {
           image: `data:image/jpeg;base64,${buffer.toString('base64')}`,
         },
         json: true,
-      }));
+      });
+    });
 }
 
 async function tryFindSource(uri, { minColorfulness, minOverhead }) {
-  let reader = sharp();
+  let reader =
+    sharp()
+      .resize(1024, 1024)
+      .withoutEnlargement()
+      .max();
   request
     .get(uri)
-    .on('error', console.log)
+    .on('error', console.error)
     .pipe(reader);
   const colorfulness = await getColorfulness(reader);
   if (colorfulness < minColorfulness) {
@@ -46,13 +54,13 @@ async function tryFindSource(uri, { minColorfulness, minOverhead }) {
   if (result && result.docs && result.docs.length > 0) {
     const bestMatch = result.docs[0];
     let overhead = bestMatch.similarity;
-    for(let i = 1; i < result.docs.length; ++i) {
-      if(result.docs[i].mal_id !== bestMatch.mal_id) {
+    for (let i = 1; i < result.docs.length; ++i) {
+      if (result.docs[i].mal_id !== bestMatch.mal_id) {
         overhead = bestMatch.similarity - result.docs[i].similarity;
         break;
       }
     }
-    if(overhead < minOverhead) {
+    if (overhead < minOverhead) {
       return null;
     }
     return {
@@ -72,7 +80,7 @@ async function tryFindSource(uri, { minColorfulness, minOverhead }) {
   }
 }
 
-async function tryFindGoodSource(url, {minSimilarity, maxAspectRatioError, minColorfulness, minOverhead }) {
+async function tryFindGoodSource(url, { minSimilarity, maxAspectRatioError, minColorfulness, minOverhead }) {
   const match = /:\/\/imgur\.com\/(\w+)$/.exec(url);
   if (match) {
     url = `https://i.imgur.com/${match[1]}.jpg`;

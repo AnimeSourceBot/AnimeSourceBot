@@ -28,6 +28,7 @@ const snoostorm = new Snoostorm(snoowrap);
 const commentStream = snoostorm.CommentStream(streamOptions);
 const submissionStream = snoostorm.SubmissionStream(streamOptions);
 
+const max_replies_to_track = 128;
 let replies = [];
 
 function containsSource(body) {
@@ -37,13 +38,13 @@ function containsSource(body) {
 async function deleteMyCommentIfSourcePosted(comment) {
   await timeout(10000); // Hack: wait to make make sure comment has replyId assigned
   if (containsSource(comment.body)) {
-    for (let i = 0; i < replies.length; ++i) {
-      if (replies[i].parentId === comment.parent_id && !replies[i].isDeleted) {
+    for (const reply of replies) {
+      if (reply.parentId === comment.parent_id && !reply.isDeleted) {
         console.log(`[DELETING] reddit.com${comment.permalink}`);
-        const myComment = snoowrap.getComment(replies[i].replyId);
+        const myComment = snoowrap.getComment(reply.replyId);
         myComment.replies.fetchAll().then(myReplies => {
           if (myReplies.length === 0) {
-            replies[i].isDeleted = true;
+            reply.isDeleted = true;
             console.log(`[DELETE] reddit.com${comment.permalink}`);
             return myComment.delete();
           } else {
@@ -75,6 +76,9 @@ async function tryPostSource(source, parent) {
     .reply(source.commentText)
     .then(reply => {
       replies.push({ parentId: reply.parent_id, replyId: reply.id });
+      if(replies.length > max_replies_to_track) {
+        replies.shift();
+      }
       console.log(`[REPLY] reddit.com${parent.permalink}`);
     });
 }

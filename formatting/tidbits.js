@@ -38,7 +38,7 @@ function statusStr(status) {
 
 function episodeStr(isMovie, episode, episodes) {
   if (!isMovie) {
-    if (!episodes) {
+    if (episode && (!episodes || episode > episodes)) {
       return `Episode: ${episode}/??`;
     }
     if (!episode) {

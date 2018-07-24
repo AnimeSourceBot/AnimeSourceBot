@@ -124,7 +124,6 @@ describe('## whatanime', () => {
         .then(({ source, commentText }) => {
           expect(source.imageInfo.frameCount).to.equal(1);
           expect(source.titleEnglish).to.equal('Girls und Panzer der Film');
-          expect(source.episode).to.equal('');
           expect(source.isMovie).to.be.true;
           expect(source.similarity).to.be.above(0.90);
           expect(source.similarity).to.be.below(1.00);

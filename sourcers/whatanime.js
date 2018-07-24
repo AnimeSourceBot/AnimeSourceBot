@@ -1,6 +1,6 @@
 const { estimateImageFramesInfo } = require('../image-processing/image-frames-info');
 const { createCommentText } = require('../formatting/comment');
-
+const parseEpisode = require('../formatting/parse-episode');
 const rp = require('request-promise');
 const request = require('request');
 const sharp = require('sharp');
@@ -54,18 +54,20 @@ async function tryFindSource(uri, { minColorfulness, minOverhead }) {
   if (result && result.docs && result.docs.length > 0) {
     const bestMatch = result.docs[0];
     let overhead = bestMatch.similarity;
+    let fileNames = [bestMatch.filename];
     for (let i = 1; i < result.docs.length; ++i) {
       if (result.docs[i].mal_id !== bestMatch.mal_id) {
         overhead = bestMatch.similarity - result.docs[i].similarity;
         break;
       }
+      fileNames.push(result.docs[i].filename);
     }
     if (overhead < minOverhead) {
       return null;
     }
     return {
       similarity: bestMatch.similarity,
-      episode: bestMatch.episode,
+      episode: parseEpisode(fileNames),
       anilistId: bestMatch.anilist_id,
       malId: bestMatch.mal_id,
       titleNative: bestMatch.title_native,

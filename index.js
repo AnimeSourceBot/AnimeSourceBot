@@ -4,7 +4,7 @@ const { tryFindGoodSource } = require('./sourcers/whatanime');
 require('dotenv').config();
 
 const streamOptions = {
-  subreddit: 'anime_irl+AnimeSourceBot',
+  subreddit: process.env.SUBREDDITS,
   results: 10,
   pollTime: 10000,
 };

@@ -1,4 +1,4 @@
-const { superscript } = require('./reddit');
+const { superscript, escape } = require('./reddit');
 const { episodeStr, formatStr, genreStr, sceneStr, similarityStr, statusStr } = require('./tidbits');
 
 function createCommentText(source, info) {
@@ -10,9 +10,9 @@ function createCommentText(source, info) {
     statusStr(info.anilistInfo.status),
     genreStr(info.anilistInfo.genres),
   ];
-  const tidbitStr = tidbits.filter(x => x).join(' | ');
+  const tidbitStr = tidbits.filter(x => x).map(escape).join(' | ');
   return (
-    `**${info.anilistInfo.title.romaji || source.titleEnglish}** - ([AL](${info.anilistUrl}), [KIT](${info.kitsuUrl}), [MAL](${info.malUrl}))
+    `**${escape(info.anilistInfo.title.romaji || source.titleEnglish)}** - ([AL](${escape(info.anilistUrl)}), [KIT](${escape(info.kitsuUrl)}), [MAL](${escape(info.malUrl)}))
 
 ${superscript(tidbitStr)}
 

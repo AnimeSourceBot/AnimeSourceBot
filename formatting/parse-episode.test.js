@@ -33,6 +33,11 @@ describe('## Parse episode number', () => {
     '[PCSUB][Boku_No_Hero_AcademiaS3][14][BIG5_JP][1080P][MP4_AAC].mp4',
     '第14集 编织必杀技吧 1080P.mp4'
   ], 14);
+  test([
+    '[異域字幕組][Gintama S3][銀魂 第三季][03_268][1280x720][繁体].mp4',
+    '[BeanSub][Gintama][268][BIG5][720p][MP4].mp4',
+    '[Leopard-Raws] Gintama (2015) - 03 RAW (TX 1280x720 x264 AAC).mp4'
+  ], 3);
 
   // this episode name is kind of strange:
   // test('[dmhy][Active Raid - Kidou Kyoushuushitsu Dai Hakkei][01v3][x264_aac][BIG5][720P_mp4].mp4', 1);

@@ -17,7 +17,7 @@ function createCommentText(source, info) {
 ${superscript(tidbitStr)}
 
 ---
-${superscript('*Dislike bots?* You can post the source yourself to make me go away. *Friend of bots?* Include the word !correct or !incorrect in your reply to train me.', 3)}`
+${superscript('*Dislike bots?* You can post the source yourself to make me go away. *Friend of bots?* Include the word !correct or !incorrect in your reply to train me. [Info](https://www.reddit.com/r/AnimeSourceBot/wiki/index)', 3)}`
   );
 }
 

@@ -1,7 +1,7 @@
 {
   "name": "animesourcebot",
   "version": "1.0.0",
-  "description": "A reddit bot which sources new anime image submissions using the whatanime.ga API",
+  "description": "A reddit bot which sources new anime image submissions using the trace.moe API",
   "license": "WTFPL-2.0",
   "private": true,
   "main": "index.js",
@@ -19,6 +19,7 @@
     "mime": "^2.3.1",
     "mocha": "^5.2.0",
     "node-fetch": "^2.1.2",
+    "recompose": "^0.27.1",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",
     "sharp": "^0.20.3",

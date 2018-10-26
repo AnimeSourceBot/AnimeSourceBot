@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-expressions */
-const whatanime = require('./whatanime');
+const tracemoe = require('./tracemoe');
 const { expect } = require('chai');
 
 function tryFindGoodSource(x) {
-  return whatanime.tryFindGoodSource(x, {
+  return tracemoe.tryFindGoodSource(x, {
     minSimilarity: 0.91,
     maxAspectRatioError: 0.15,
     minColorfulness: 0.05,
@@ -11,7 +11,7 @@ function tryFindGoodSource(x) {
   });
 }
 
-describe('## whatanime', () => {
+describe('## tracemoe', () => {
   describe('# Single frame anime', () => {
     it('should detect Gabriel Dropout EP#6 from jpeg', (done) => {
       tryFindGoodSource('https://i.imgur.com/NemuozL.jpg')

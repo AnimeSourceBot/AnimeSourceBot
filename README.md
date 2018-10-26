@@ -1,10 +1,10 @@
 # AnimeSourceBot
 
-AnimeSourceBot is a reddit bot for automatically sourcing anime image submissions on reddit using whatanime.ga for image matching. 
+AnimeSourceBot is a reddit bot for automatically sourcing anime image submissions on reddit using trace.moe for image matching. 
 
 ## Deploying the bot
 
-You will need [a reddit script app](https://www.reddit.com/prefs/apps/) and [API token for whatanime.ga](https://soruly.github.io/whatanime.ga/)
+You will need [a reddit script app](https://www.reddit.com/prefs/apps/) and [API token for trace.moe](https://soruly.github.io/trace.moe/)
 
 - create `.env` and fill in the environment variables (see: `.env.template`)
 

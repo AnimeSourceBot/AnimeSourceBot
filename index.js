@@ -1,6 +1,6 @@
 const Snoowrap = require('snoowrap');
 const Snoostorm = require('snoostorm');
-const { tryFindGoodSource } = require('./sourcers/whatanime');
+const { tryFindGoodSource } = require('./sourcers/tracemoe');
 require('dotenv').config();
 
 const streamOptions = {

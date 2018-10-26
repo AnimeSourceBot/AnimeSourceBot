@@ -38,6 +38,7 @@ describe('## Parse episode number', () => {
     '[BeanSub][Gintama][268][BIG5][720p][MP4].mp4',
     '[Leopard-Raws] Gintama (2015) - 03 RAW (TX 1280x720 x264 AAC).mp4'
   ], 3);
+  test('[HaSub&Airota] Bakuon!! - 08 [720].v2016-06-09.cht.mp4', 8);
 
   // this episode name is kind of strange:
   // test('[dmhy][Active Raid - Kidou Kyoushuushitsu Dai Hakkei][01v3][x264_aac][BIG5][720P_mp4].mp4', 1);

@@ -5,13 +5,11 @@ const rp = require('request-promise');
 const request = require('request');
 const sharp = require('sharp');
 const aggregateInfo = require('../infoers/aggregate-info');
-const tmp = require('tmp-promise');
-tmp.setGracefulCleanup();
 const { getColorfulness } = require('../image-processing/colorfulness');
 require('dotenv').config();
-const api_token = process.env.WHATANIME_TOKEN;
+const api_token = process.env.TRACEMOE_TOKEN;
 
-function requestWhatanime(reader) {
+function requestTracemoe(reader) {
   return reader
     .jpeg()
     .toBuffer()
@@ -21,7 +19,7 @@ function requestWhatanime(reader) {
       }
       return rp({
         method: 'POST',
-        uri: `https://whatanime.ga/api/search?token=${api_token}`,
+        uri: `https://trace.moe/api/search?token=${api_token}`,
         formData: {
           image: `data:image/jpeg;base64,${buffer.toString('base64')}`,
         },
@@ -50,7 +48,7 @@ async function tryFindSource(uri, { minColorfulness, minOverhead }) {
       .resize(imageInfo.width, imageInfo.frameHeight)
       .crop(sharp.gravity.north);
   }
-  const result = await requestWhatanime(reader);
+  const result = await requestTracemoe(reader);
   if (result && result.docs && result.docs.length > 0) {
     const bestMatch = result.docs[0];
     let overhead = bestMatch.similarity;
